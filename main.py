@@ -16,7 +16,7 @@ def Screen(player: Player, message, wait=False):
     print("\033[2J\033[H", end="", flush=True)
     print("----------------------------------------------------------------")
     print(
-        f"| {player.hp:2}/{player.Maxhp:2} | 포만도 : {player.hungry:3} | 목마름 : {player.water:2} | 무기 : {player.weapon.name:5}| {AdventrueManager.Turn:2}일차 |"
+        f"| {player.hp:2}/{player.Maxhp:2} | 포만도 : {player.hungry:3} | 수분 : {player.water:3} | 무기 : {player.weapon.name:5}| {AdventrueManager.Turn:2}일차 |"
     )
     print("----------------------------------------------------------------\n")
     print(message)
@@ -32,8 +32,9 @@ def Battle(player: Player, animal: Animal):
         Screen(player, message)
         sleep(2)
         if not animal.live:
-            [player.InputInventory(item) for item in drop]
-            message += f"{drop}을/을 획득했다"
+            for item in drop:
+                player.InputInventory(item)
+                message += f"{item.name}을/을 획득했다"
             Screen(player, message, wait=True)
             return True
         player.hit(animal.attack())
@@ -84,6 +85,11 @@ def MainLoop(player: Player):
     player.playerPeanltyCheck()
     if not player.live:
         return player.live
+    Screen(
+        player,
+        f"하루가 지나 포만감이 {hungryD}만큼, 수분이 {waterD}만큼 감소했다",
+        wait=True,
+    )
     return True
 
 

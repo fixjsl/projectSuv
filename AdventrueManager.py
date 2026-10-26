@@ -5,7 +5,7 @@ from data import EventType
 
 class AdventrueManager:
     Turn = 0
-    MaxTurn = random.randrange(9, 12)
+    MaxTurn = 5  # random.randrange(9, 12)
 
     def __init__(self, Selectiondata):
         self.SelectionData = Selectiondata
