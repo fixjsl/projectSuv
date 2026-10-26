@@ -1,5 +1,5 @@
 class Animal:
-    def __init__(self,data):
+    def __init__(self, data):
         self.name = data["name"]
         self.hp = data["hp"]
         self.atk = data["atk"]
@@ -10,12 +10,13 @@ class Animal:
     def attack(self):
         return self.atk
 
-
     def hit(self, damage):
         self.hp -= damage
-        if self.hp<0:
-            self.die()
+
+        return self.die()
 
     def die(self):
-        print("동물 사망")
-        self.live = False
+
+        if self.hp <= 0:
+            self.live = False
+        return self.dropItem

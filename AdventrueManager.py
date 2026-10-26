@@ -1,23 +1,23 @@
 import random
 
-from Selection import EventType
+from data import EventType
 
 
-class AdventrueManager():
+class AdventrueManager:
     Turn = 0
-    MaxTurn = random.randrange(9,12)
+    MaxTurn = random.randrange(9, 12)
 
-    def __init__(self,Selectiondata):
-        self.SelectionData = self.SelectionData
-        self.ExitEvent
+    def __init__(self, Selectiondata):
+        self.SelectionData = Selectiondata
+        self.ExitEvent = None
         for i in self.SelectionData:
-            if i["type"] == EventType.Exit:
-                self.Exitevent = i
+            if i.type == EventType.Exit:
+                self.ExitEvent = i
                 self.SelectionData.remove(i)
 
     def SelectionSelect(self):
-        if AdventrueManager.turn == AdventrueManager.MaxTurn: 
-            return self.Exitevent
-        Eventnum = random.randrange(0,len(self.SelectionData))
+        if AdventrueManager.Turn == AdventrueManager.MaxTurn:
+            return self.ExitEvent
+        Eventnum = random.randrange(0, len(self.SelectionData))
         Event = self.SelectionData[Eventnum]
         return Event
